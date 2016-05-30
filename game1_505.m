@@ -5,7 +5,7 @@ sizeofM = size(M);
 n = sizeofM(1);
 m = sizeofM(1);
 
-presize = 5;
+presize = 10;
 
 sum=0;
 
@@ -30,7 +30,6 @@ for a=(1:1:50)
 	testAns=[];
 	runAns=[];
 	fnum=[];
-	cx=[0 0 0];
 
     for b=(1:1:50)
         seq=[seq int16(M(a,b)+1)];
@@ -122,7 +121,7 @@ for a=(1:1:50)
             end
         end
 
-        if (b>presize && cx(1)+cx(2)+cx(3)==3)
+        if (b>30)
           	ttt=0;
         	[trans, emis] = hmmestimate(seq, states);
             [trans, emis] = hmmtrain(seq, trans, emis);
@@ -140,8 +139,8 @@ for a=(1:1:50)
 
             res=1;
         	for c=(1:1:3)
-				if (resY(c)>resY(res))
-					res=c;
+                if (resY(c)>resY(res))
+                	res=c;
                 end
             end
     
@@ -158,41 +157,24 @@ for a=(1:1:50)
 					res2=int16(floor(rand*3)+1);
 				end
 			end
-			if (b>30)
 
-			%runAns=[runAns,res2-1];
+			runAns=[runAns,res2-1];
 
 			pr=rand;
            	%if (pr<=c1*1.0/(c1+c2+c3))
 			if (c1>=c2 && c1>=c3)
                 runAns=[runAns,seqe(b)-1];
             else
-				%if (pr<=(c1+c2)*1.0/(c1+c2+c3))
-				if (c2>c3)
+			%if (pr<=(c1+c2)*1.0/(c1+c2+c3))
+			if (c2>c3)
 	        		runAns=[runAns,res-1];
 				else
 					runAns=[runAns,res2-1];
 				end
             end
 			fnum=[fnum;[seqe(b)-1,res-1,res2-1]];
-			%ft=[0,0,0];
-			%ft(int16(seqe(b)))=ft(int16(seqe(b)))+1;
-			%ft(res)=ft(res)+1;
-			%ft(res2)=ft(res2)+1;
-			%x=1;
-			%for c=(1:1:3)
-			%	if (ft(c)>ft(x))
-			%		x=c;
-			%	end
-			%end
-			%if (ft(x)==1)
-			%	x=int16(floor(rand*3)+1);
-			%end
-			%x=x-1;
-			%runAns=[runAns,x];
 
         	testAns = [testAns,M(a,b)];
-			end
         	if (M(a,b)==seqe(b)-1)
         		c1=c1+1;
             end
@@ -204,20 +186,10 @@ for a=(1:1:50)
 			end
         end
 
-
         if (b>presize)
             X=[X;nowX];
             Y=[Y;nowY];
             sY=[sY;nowsY];
-			if (M(a,b)==0)
-				cx(1)=1;
-			end
-			if (M(a,b)==1)
-				cx(2)=1;
-			end
-			if (M(a,b)==2)
-				cx(3)=1;
-			end
         end
     end
 
@@ -231,22 +203,22 @@ for a=(1:1:50)
 			end
 		end
 	end
-	xyz=[xyz;[a,tot]];
-    tot=0;
-    for b=(1:1:20)
-        if (testAns(b)==runAns(b))
-            tot=tot+1;
-        end
-    end
-	%x=1;
-	%if (tot(2)>tot(x))
-	%	x=2;
-	%end
-	%if (tot(3)>tot(x))
-	%	x=3;
-	%end
-	sum=sum+tot;
-	[a,tot,sum]
+    %tot=0;
+    %for b=(1:1:20)
+    %    if (testAns(b)==runAns(b))
+    %        tot=tot+1;
+    %    end
+    %end
+	x=1;
+	if (tot(2)>tot(x))
+		x=2;
+	end
+	if (tot(3)>tot(x))
+		x=3;
+	end
+	sum=sum+tot(x);
+	[a,tot(x),sum]
+	xyz=[xyz;[a,tot(x),sum]];
 end
 
 sum
