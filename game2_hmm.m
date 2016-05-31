@@ -23,9 +23,6 @@ for a=(1:1:50)
 	runAns=[];
 
 	for b=(1:1:50)
-		seq=[seq int16(M(a,b)+1)];
-		nows=int16(M(a,b)+1);
-		states=[states nows];
 		if (b>30)
 			ttt=0;
 			[trans, emis] = hmmestimate(seq, states);
@@ -40,6 +37,9 @@ for a=(1:1:50)
 			runAns = [runAns,res-1];
 			testAns = [testAns,M(a,b)];
 		end
+		seq=[seq int16(M(a,b)+1)];
+		nows=int16(M(a,b)+1);
+		states=[states nows];
 	end
 
 	tot=0;

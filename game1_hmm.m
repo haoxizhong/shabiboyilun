@@ -29,7 +29,7 @@ for a=(1:1:50)
 		if (b>30)
 			ttt=0;
 			[trans, emis] = hmmestimate(seq, states);
-			[trans, emis] = hmmtrain(seq, trans, emis);
+			%[trans, emis] = hmmtrain(seq, trans, emis);
 			%[seqe,stat] = hmmgenerate(50,trans,emis);
 			res=1;
 			for c=(1:1:3)
