@@ -22,14 +22,11 @@ for a=(1:1:50)
 	testAns=[];
 	runAns=[];
 
-	for b=(2:1:50)
-		seq=[seq int16(M(a,b)+1)];
-		nows=int16(M(a,b)+1);
-		states=[states nows];
+	for b=(1:1:50)
 		if (b>30)
 			ttt=0;
 			[trans, emis] = hmmestimate(seq, states);
-			%[trans, emis] = hmmtrain(seq, trans, emis);
+			[trans, emis] = hmmtrain(seq, trans, emis);
 			%[seqe,stat] = hmmgenerate(50,trans,emis);
 			res=1;
 			for c=(1:1:3)
@@ -40,6 +37,9 @@ for a=(1:1:50)
 			runAns = [runAns,res-1];
 			testAns = [testAns,M(a,b)];
 		end
+		seq=[seq int16(M(a,b)+1)];
+		nows=int16(M(a,b)+1);
+		states=[states nows];
 	end
 
 	tot=0;

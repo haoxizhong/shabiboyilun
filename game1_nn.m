@@ -112,8 +112,8 @@ for a=(1:1:50)
 		if (b>30)
 			net = newff( minmax(X'), [10 3] , {'purelin' 'logsig' } , 'traingdx');
 			net.trainparam.show = 5000 ;
-			net.trainparam.epochs = 1000 ;
-			net.trainparam.goal = 0.2 ;
+			net.trainparam.epochs = 2000 ;
+			net.trainparam.goal = 0.1 ;
 			net.trainParam.lr = 0.01 ;
 			net = train(net,X',Y');
 
