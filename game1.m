@@ -11,6 +11,9 @@ sum=0;
 
 warning off;
 xyz=[];
+	c1=1;
+	c2=1;
+	c3=1;
 
 for a=(1:1:50)
     if (mod(a,2)==0)
@@ -18,9 +21,6 @@ for a=(1:1:50)
     else
         op=a+1;
 	end
-	c1=1;
-	c2=1;
-	c3=1;
 
 	X=[];
 	Y=[];
@@ -167,7 +167,7 @@ for a=(1:1:50)
 			if (c1>=c2 && c1>=c3)
                 runAns=[runAns,seqe(b)-1];
             else
-				%if (pr<=(c1+c2)*1.0/(c1+c2+c3))
+			%	%if (pr<=(c1+c2)*1.0/(c1+c2+c3))
 				if (c2>c3)
 	        		runAns=[runAns,res-1];
 				else
